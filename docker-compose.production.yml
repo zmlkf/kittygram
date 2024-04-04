@@ -28,6 +28,8 @@ services:
   gateway:
     image: zmlkf/kittygram_gateway
     env_file: .env
+    depends_on:
+      - db
     ports:
       - 9000:80
     volumes:
