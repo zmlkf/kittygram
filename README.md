@@ -1,4 +1,5 @@
 # Kittygram - социальная сеть для любителей котиков
+[![Main Kittygram workflow](https://github.com/zmlkf/kittygram_final/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/zmlkf/kittygram_final/actions/workflows/main.yml)
 
 ## Описание
 Kittygram - это онлайн платформа, разработанная для хозяев котиков. Здесь владельцы пушистых могут делиться своими питомцами, указывать их год рождения, добавлять фотографии и по желанию их достижения. А так же можно любоваться другими котиками, добавленными на платформу.
