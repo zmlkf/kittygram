@@ -177,6 +177,6 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           Деплой Kittygram успешно выполнен!
-          Автор действия: ${{ github.actor }}
+          Автор коммита: ${{ github.actor }}
           Сообщение последнего коммита: ${{ github.event.commits[0].message }}
-          Ссылка на коммит: ${{ github.event.commits[0].html_url }}
+          Ссылка на коммит: https://github.com/${{ github.repository }}/commit/${{github.sha}}
