@@ -1,89 +1,64 @@
-# Kittygram - социальная сеть для любителей котиков
+# Kittygram - A Social Network for Cat Lovers
 [![Main Kittygram workflow](https://github.com/zmlkf/kittygram_final/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/zmlkf/kittygram_final/actions/workflows/main.yml)
 
-## Описание
-Kittygram - это онлайн платформа, разработанная для хозяев котиков. Здесь владельцы пушистых могут делиться своими питомцами, указывать их год рождения, добавлять фотографии и по желанию их достижения. А так же можно любоваться другими котиками, добавленными на платформу.
+## Description
+Kittygram is an online platform designed for cat owners. Here, pet owners can share their furry friends, add their birth year, photos, and achievements. You can also admire other cats that are already on the platform.
 
-## Стек примененных технологий
-1. Python 3.9 
-Высокоуровневый язык программирования, широко используемый для веб-разработки, анализа данных, искусственного интеллекта и многих других областей. 
+## Contributions
+This project was created by [Roman Zemliakov](https://github.com/zmlkf). My contributions to this project include:
+1. Writing the GitHub Actions workflow file (`kittygram_workflow.yml`) which includes:
+   - Running tests and code style checks (flake8 and Django tests).
+   - Building and pushing Docker images for the backend, frontend, and gateway to DockerHub.
+   - Deploying the project to a remote server using docker-compose.
+   - Sending notifications to Telegram about deployment results.
+2. Creating Dockerfiles for the backend and nginx.
+3. Creating the `docker-compose.yml` file to run all project services.
 
-2. Django 3.2.3
-Мощный фреймворк для веб-разработки на Python. Django обеспечивает быстрое создание безопасных и масштабируемых веб-приложений благодаря своей архитектуре, включающей ORM (Object-Relational Mapping) для работы с базой данных, систему маршрутизации URL, систему администрирования и многие другие функции.
+## Cloning and Running the Project
 
-3. Nginx
-Высокопроизводительный веб-сервер и прокси-сервер, который обеспечивает обработку запросов от клиентов и маршрутизацию их к соответствующим веб-приложениям или сервисам. Nginx также может использоваться для обслуживания статических файлов, балансировки нагрузки и других задач.
-
-4. Gunicorn 20.1.0
-WSGI (Web Server Gateway Interface) сервер для Python веб-приложений. Gunicorn используется для запуска и управления веб-приложениями Django, обеспечивая их стабильную работу и масштабируемость.
-
-5. Docker 
-Платформа для разработки, доставки и запуска приложений в контейнерах. Docker обеспечивает унифицированный способ упаковки приложений и их зависимостей, что делает процесс развертывания и масштабирования приложений проще и более надежным.
-
-6. GitHub Actions
-Сервис автоматизации задач на основе событий, предоставляемый GitHub. GitHub Actions позволяет создавать и настраивать рабочие процессы для вашего репозитория на GitHub, такие как тестирование, сборка, развертывание и многие другие операции, которые могут быть выполнены автоматически при определенных событиях в репозитории.
-
-## Локальный запуск проекта
-1. Клониронить репезиторий 
-```
+### Cloning the Repository
+First, clone the repository to your local machine:
+```bash
 git clone git@github.com:zmlkf/kittygram_final.git
+cd kittygram_final
 ```
 
-2. Создать файл с переменными окружения
+### Setting Up Environment Variables
+Create a `.env` file in the root directory of the project and set the necessary environment variables. For example:
 ```
-touch .env
-```
-```
-Переменные:
-POSTGRES_DB=<БазаДанных>
-POSTGRES_USER=<имя пользователя>
-POSTGRES_PASSWORD=<пароль>
-DB_NAME=<имя БазыДанных>
-DB_HOST=db
-DB_PORT=5432
-SECRET_KEY=<ключ Django>
+POSTGRES_USER=your_postgres_user
+POSTGRES_PASSWORD=your_postgres_password
+POSTGRES_DB=your_postgres_db
 ```
 
-4. Запустить Dockercompose
-```
-docker compose -f docker-compose.yml pull
-docker compose -f docker-compose.yml down
-docker compose -f docker-compose.yml up -d
-```
-
-5. Применить миграции, собрать и копировать статику
-```
-sudo docker compose -f docker-compose.yml exec backend python manage.py migrate
-sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic
-sudo docker compose -f docker-compose.yml exec backend cp -r /app/collected_static/. /backend_static/static/ 
+### Building and Running the Project with Docker Compose
+Ensure you have Docker and Docker Compose installed on your machine. Then, run the following commands:
+```bash
+docker-compose up --build
 ```
 
-## Автор
-Roman Zemliakov [GitHub](https://github.com/zmlkf)
+This will build the Docker images and start the containers for the database, backend, frontend, and nginx gateway.
 
-#  Как работать с репозиторием финального задания
 
-## Что нужно сделать
+## Deploying the Project
+The project is set up for continuous deployment using GitHub Actions. On every push to the main branch, the following steps are performed automatically:
+1. Tests and linting are run.
+2. Docker images are built and pushed to DockerHub.
+3. The project is deployed to a remote server using docker-compose.
+4. A notification is sent to Telegram about the deployment status.
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
-
-## Как проверить работу с помощью автотестов
-
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
+To deploy the project manually, you can use the provided GitHub Actions workflow or copy the `docker-compose.production.yml` file to your server and run:
+```bash
+sudo docker compose -f docker-compose.production.yml pull
+sudo docker compose -f docker-compose.production.yml down
+sudo docker compose -f docker-compose.production.yml up -d
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
 ```
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+## Author
+This project was created by [Roman Zemliakov](https://github.com/zmlkf).
+```
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
-
-## Чек-лист для проверки перед отправкой задания
-
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+This `README.md` file provides a comprehensive overview of the project, your contributions, and instructions for cloning and running the project.
