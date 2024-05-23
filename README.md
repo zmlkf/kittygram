@@ -1,5 +1,4 @@
 # Kittygram - A Social Network for Cat Lovers
-[![Main Kittygram workflow](https://github.com/zmlkf/kittygram_final/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/zmlkf/kittygram_final/actions/workflows/main.yml)
 
 ## Description
 Kittygram is an online platform designed for cat owners. Here, pet owners can share their furry friends, add their birth year, photos, and achievements. You can also admire other cats that are already on the platform.
