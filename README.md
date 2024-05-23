@@ -18,8 +18,8 @@ This project was created by [Roman Zemliakov](https://github.com/zmlkf). My cont
 ### Cloning the Repository
 First, clone the repository to your local machine:
 ```bash
-git clone git@github.com:zmlkf/kittygram_final.git
-cd kittygram_final
+git clone git@github.com:zmlkf/kittygram.git
+cd kittygram
 ```
 
 ### Setting Up Environment Variables
